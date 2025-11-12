@@ -43,6 +43,12 @@ export default function Home() {
             style={[styles.taxi, { transform: [{ translateX: taxiPosition }] }]}
           />
         </View>
+        {/* Bottom Arrow Button */}
+        <Animated.View style={[styles.arrowButton, { opacity: textOpacity }]}>
+          <TouchableOpacity style={styles.arrowCircle}>
+            <Ionicons name="arrow-forward" size={28} color="white" />
+          </TouchableOpacity>
+        </Animated.View>
       </View>
     </ImageBackground>
   );
@@ -59,36 +65,51 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   content: {
-  flex: 1,
-  justifyContent: "center",
-  alignItems: "center",
-  paddingHorizontal: 30,
-},
-title: {
-  fontSize: 40,
-  fontWeight: "bold",
-  color: "#FFD700",
-  textAlign: "center",
-  marginBottom: 20,
-},
-description: {
-  fontSize: 14,
-  color: "white",
-  textAlign: "center",
-  marginBottom: 40,
-  lineHeight: 22,
-},
-taxi: {
-  width: 200,
-  height: 150,
-  resizeMode: "contain",
-},
-appName: {
-  fontSize: 30,
-  fontWeight: "900",
-  color: "white",
-  letterSpacing: 15,
-  marginBottom: 20,
-  textAlign: "center",
-},
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 30,
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: "bold",
+    color: "#FFD700",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  description: {
+    fontSize: 14,
+    color: "white",
+    textAlign: "center",
+    marginBottom: 40,
+    lineHeight: 22,
+  },
+  taxi: {
+    width: 200,
+    height: 150,
+    resizeMode: "contain",
+  },
+  appName: {
+    fontSize: 30,
+    fontWeight: "900",
+    color: "white",
+    letterSpacing: 15,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  arrowButton: {
+    position: "absolute",
+    bottom: 50,
+    alignSelf: "center",
+  },
+  arrowCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "rgba(255, 215, 0, 0.3)",
+    borderWidth: 2,
+    borderColor: "#FFD700",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
