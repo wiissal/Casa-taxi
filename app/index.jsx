@@ -59,10 +59,10 @@ export default function Home() {
             style={[styles.taxi, { transform: [{ translateX: taxiPosition }] }]}
           />
         </View>
-        {/* Bottom Arrow Button */}
-        <Animated.View style={[styles.arrowButton, { opacity: textOpacity }]}>
-          <TouchableOpacity style={styles.arrowCircle}>
-            <Ionicons name="arrow-forward" size={28} color="white" />
+        {/* Book Ride Button */}
+        <Animated.View style={[styles.bookButton, { opacity: textOpacity }]}>
+          <TouchableOpacity style={styles.bookButtonCircle}>
+            <Text style={styles.buttonText}>Book Now</Text>
           </TouchableOpacity>
         </Animated.View>
       </View>
@@ -113,19 +113,22 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
   },
-  arrowButton: {
+  bookButton: {
     position: "absolute",
     bottom: 50,
     alignSelf: "center",
   },
-  arrowCircle: {
-    width: 60,
-    height: 60,
+  bookButtonCircle: {
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    backgroundColor: "#DC143C",
     borderRadius: 30,
-    backgroundColor: "rgba(255, 215, 0, 0.3)",
-    borderWidth: 2,
-    borderColor: "#FFD700",
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
