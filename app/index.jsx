@@ -12,6 +12,22 @@ import { Ionicons } from "@expo/vector-icons";
 export default function Home() {
   const taxiPosition = useRef(new Animated.Value(300)).current;
   const textOpacity = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.sequence([
+      // Taxi drives in from right
+      Animated.timing(taxiPosition, {
+        toValue: 0,
+        duration: 2000,
+        useNativeDriver: true,
+      }),
+      // Text fades in
+      Animated.timing(textOpacity, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []);
 
   return (
     <ImageBackground
@@ -23,7 +39,7 @@ export default function Home() {
         <View style={styles.content}>
           {/* App Name */}
           <Animated.Text style={[styles.appName, { opacity: textOpacity }]}>
-            C A S A T A X I
+            M O V E
           </Animated.Text>
 
           {/* Animated Title */}
