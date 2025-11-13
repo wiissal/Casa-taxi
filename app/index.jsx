@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import { useEffect, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
-
-export default function Home() {
+import home from "./home";
+export default function Index() {
   const taxiPosition = useRef(new Animated.Value(300)).current;
   const textOpacity = useRef(new Animated.Value(0)).current;
   useEffect(() => {

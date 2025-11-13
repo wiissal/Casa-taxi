@@ -1,27 +1,19 @@
-// 10 Places in Casablanca
+// 10 places in Casablanca
 export const casaLocations = [
   {
     id: "aeroport-mohammed-v",
     name: "Aéroport Mohammed V",
     coordinates: {
-      latitude: 33.3673,
+      latitude: 33.3675,
       longitude: -7.5898,
-    },
-  },
-  {
-    id: "gare-casa",
-    name: "Gare Casa-Voyageurs",
-    coordinates: {
-      latitude: 33.5731,
-      longitude: -7.5798,
     },
   },
   {
     id: "morocco-mall",
     name: "Morocco Mall",
     coordinates: {
-      latitude: 33.5722,
-      longitude: -7.6237,
+      latitude: 33.5731,
+      longitude: -7.6256,
     },
   },
   {
@@ -46,6 +38,14 @@ export const casaLocations = [
     coordinates: {
       latitude: 33.5731,
       longitude: -7.6130,
+    },
+  },
+  {
+    id: "gare-casa",
+    name: "Gare Casa-Voyageurs",
+    coordinates: {
+      latitude: 33.5731,
+      longitude: -7.5798,
     },
   },
   {
