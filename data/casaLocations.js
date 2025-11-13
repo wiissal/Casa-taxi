@@ -1,4 +1,3 @@
-// 10 Popular Locations in Casablanca
 export const casaLocations = [
   {
     id: "aeroport-mohammed-v",
@@ -37,7 +36,7 @@ export const casaLocations = [
     name: "Twin Center",
     coordinates: {
       latitude: 33.5731,
-      longitude: -7.5898,
+      longitude: -7.5550,
     },
   },
   {

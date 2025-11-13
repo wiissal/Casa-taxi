@@ -4,15 +4,15 @@ import {
   StyleSheet,
   ImageBackground,
   Animated,
-  TouchableOpacity,
 } from "react-native";
 import { useEffect, useRef } from "react";
-import {useRouter} from "expo-router";
-import home from "./home";
+import { useRouter } from "expo-router";
+
 export default function Index() {
   const taxiPosition = useRef(new Animated.Value(300)).current;
   const textOpacity = useRef(new Animated.Value(0)).current;
   const router = useRouter();
+
   useEffect(() => {
     Animated.sequence([
       // Taxi drives in from right
@@ -27,7 +27,10 @@ export default function Index() {
         duration: 1000,
         useNativeDriver: true,
       }),
-    ]).start();
+    ]).start(() => {
+      // After animation finishes, navigate to home
+      router.push("/home");
+    });
   }, []);
 
   return (
@@ -60,12 +63,6 @@ export default function Index() {
             style={[styles.taxi, { transform: [{ translateX: taxiPosition }] }]}
           />
         </View>
-        {/* Book Ride Button */}
-        <Animated.View style={[styles.bookButton, { opacity: textOpacity }]}>
-          <TouchableOpacity style={styles.bookButtonCircle} onPress={() => router.push("/home")}>
-            <Text style={styles.buttonText}>Book Now</Text>
-          </TouchableOpacity>
-        </Animated.View>
       </View>
     </ImageBackground>
   );
@@ -113,23 +110,5 @@ const styles = StyleSheet.create({
     letterSpacing: 15,
     marginBottom: 20,
     textAlign: "center",
-  },
-  bookButton: {
-    position: "absolute",
-    bottom: 50,
-    alignSelf: "center",
-  },
-  bookButtonCircle: {
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    backgroundColor: "#DC143C",
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
   },
 });
