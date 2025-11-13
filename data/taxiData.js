@@ -6,7 +6,7 @@ export const CASA_CENTER = {
   longitudeDelta: 0.05,
 };
 
-// User current position (simulated - same as center)
+// User current position ( same as center)
 export const USER_POSITION = {
   latitude: 33.5731,
   longitude: -7.5898,
@@ -16,8 +16,8 @@ export const USER_POSITION = {
 export const AVAILABLE_TAXIS = [
   {
     id: "TAXI-001",
-    latitude: 33.5731,
-    longitude: -7.5898,
+    latitude: 33.5821,
+    longitude: -7.5998,
     name: "Hassan",
   },
   {
@@ -46,8 +46,8 @@ export const AVAILABLE_TAXIS = [
   },
   {
     id: "TAXI-006",
-    latitude: 33.5641,
-    longitude: -7.5798,
+    latitude: 33.5651,
+    longitude: -7.5998,
     name: "Leila",
   },
 ];
