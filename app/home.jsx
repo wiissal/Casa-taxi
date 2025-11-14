@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffd900ba",
     borderRadius: 20,
     paddingHorizontal: 10,
-    paddingVertical: 5,git 
+    paddingVertical: 5,
 
   },
   switchLabel: {
