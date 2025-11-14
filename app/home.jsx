@@ -64,8 +64,13 @@ export default function Home() {
 
   const handleBooking = () => {
     if (selectedDeparture && selectedDestination) {
-      console.log("Booking:", selectedDeparture, selectedDestination);
-      router.push("/booking");
+      router.push({
+        pathname: "/booking",
+        params: {
+          departure: JSON.stringify(selectedDeparture),
+          destination: JSON.stringify(selectedDestination),
+        },
+      });
     }
   };
 
@@ -246,7 +251,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
-
   },
   switchLabel: {
     fontWeight: "bold",
@@ -306,7 +310,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   optionsScroll: {
-    paddingVertical: 10 ,
+    paddingVertical: 10,
     paddingHorizontal: 20,
   },
   selectionSection: {
@@ -351,25 +355,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   bookButton: {
-  position: "absolute",
-  bottom: 50,
-  left: 20,
-  right: 20,
-  backgroundColor: "#FFD700",
-  paddingVertical: 16,
-  borderRadius: 12,
-  justifyContent: "center",
-  alignItems: "center",
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.3,
-  shadowRadius: 6,
-  elevation: 8,
-},
-buttonText: {
-  color: "#000",
-  fontSize: 18,
-  fontWeight: "bold",
-  letterSpacing: 0.5,
-},
+    position: "absolute",
+    bottom: 50,
+    left: 20,
+    right: 20,
+    backgroundColor: "#FFD700",
+    paddingVertical: 16,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  buttonText: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 0.5,
+  },
 });
