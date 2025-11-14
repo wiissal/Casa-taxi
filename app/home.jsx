@@ -242,11 +242,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     zIndex: 10,
+    backgroundColor: "#ffd900ba",
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,git 
+
   },
   switchLabel: {
     fontWeight: "bold",
     fontSize: 14,
-    color: "#000",
+    color: "#131313ff",
   },
   bottomSheetContainer: {
     flex: 1,
