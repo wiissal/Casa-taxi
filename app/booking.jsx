@@ -313,7 +313,14 @@ export default function Booking() {
           </View>
         </View>
       </ScrollView>
-      
+      {/* Book Now Button */}
+      <TouchableOpacity
+        style={styles.bookNowButton}
+        onPress={handleConfirmBooking}
+      >
+        <Text style={styles.bookNowButtonText}>Book Now</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
-</View>
-)}
