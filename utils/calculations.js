@@ -31,3 +31,16 @@ export const calculateTime = (distanceKm) => {
   const timeMinutes = (distanceKm / AVERAGE_SPEED) * 60;
   return Math.round(timeMinutes); // Return as integer minutes
 };
+// Determine if it's day or night based on current time
+export const getDayNightMode = () => {
+  const currentHour = new Date().getHours();
+  // Day: 6 AM (6) to 6 PM (18)
+  // Night: 6 PM (18) to 6 AM (6)
+  const isNightMode = currentHour >= 18 || currentHour < 6;
+  return isNightMode;
+};
+
+// Get readable mode string
+export const getModeString = () => {
+  return getDayNightMode() ? " Night Mode" : " Day Mode";
+};
