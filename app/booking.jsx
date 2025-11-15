@@ -207,7 +207,113 @@ export default function Booking() {
             </View>
           </View>
         </View>
+        {/* Payment Details Card */}
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <MaterialCommunityIcons
+              name="credit-card"
+              size={20}
+              color="#FFD700"
+            />
+            <Text style={styles.cardTitle}>Payment Details</Text>
+          </View>
+
+          {/* Current Mode Badge */}
+          <View style={styles.modeBadge}>
+            <MaterialCommunityIcons
+              name={isNightMode ? "moon-waning-crescent" : "weather-sunny"}
+              size={18}
+              color="#FFD700"
+            />
+            <Text style={styles.modeBadgeText}>{getModeString()}</Text>
+          </View>
+
+          {/* Day Rate */}
+          <View style={styles.rateRow}>
+            <View>
+              <Text style={styles.rateLabel}>☀️ Day Rate (6 AM - 6 PM)</Text>
+              <Text style={styles.rateDetail}>1.50 DH/km + 7.50 DH base</Text>
+            </View>
+            <Text style={styles.rateAmount}>{dayPrice} DH</Text>
+          </View>
+
+          {/* Night Rate */}
+          <View style={styles.rateRow}>
+            <View>
+              <Text style={styles.rateLabel}>🌙 Night Rate (6 PM - 6 AM)</Text>
+              <Text style={styles.rateDetail}>2.00 DH/km + 7.50 DH base</Text>
+            </View>
+            <Text style={styles.rateAmount}>{nightPrice} DH</Text>
+          </View>
+
+          <View style={styles.divider} />
+
+          {/* Total Amount */}
+          <View style={styles.totalSection}>
+            <Text style={styles.totalLabel}>Total Amount</Text>
+            <Text style={styles.totalPrice}>{currentPrice} DH</Text>
+          </View>
+
+          {/* Info Message */}
+          <View style={styles.infoBox}>
+            <MaterialCommunityIcons
+              name="information"
+              size={16}
+              color="#FFD700"
+            />
+            <Text style={styles.infoText}>
+              Price calculated based on current time
+            </Text>
+          </View>
+        </View>
+
+        {/* Map Preview */}
+        <View style={styles.mapPreviewContainer}>
+          <Text style={styles.mapPreviewTitle}>Route Map</Text>
+          <View style={styles.mapPreview}>
+            <MapView
+              style={styles.mapPreviewMap}
+              region={{
+                latitude:
+                  (departure.coordinates.latitude +
+                    destination.coordinates.latitude) /
+                  2,
+                longitude:
+                  (departure.coordinates.longitude +
+                    destination.coordinates.longitude) /
+                  2,
+                latitudeDelta: 0.05,
+                longitudeDelta: 0.05,
+              }}
+            >
+              {/* Departure marker */}
+              <Marker
+                coordinate={departure.coordinates}
+                pinColor="green"
+                title={departure.name}
+              />
+
+              {/* Destination marker */}
+              <Marker
+                coordinate={destination.coordinates}
+                pinColor="red"
+                title={destination.name}
+              />
+
+              {/* Route line */}
+              <Polyline
+                coordinates={[
+                  departure.coordinates,
+                  destination.coordinates,
+                ]}
+                strokeColor="#FFD700"
+                strokeWidth={3}
+              />
+            </MapView>
+          </View>
+        </View>
       </ScrollView>
+      
 
 </View>
 )}
