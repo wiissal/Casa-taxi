@@ -27,4 +27,19 @@ const TAXI_IMAGES = [
   require("../taxithree.png"),
 ];
 
-export default function Booking() {}
+export default function Booking() {
+  const router = useRouter();
+  const params = useLocalSearchParams();
+  const startRide = useTaxiStore((state) => state.startRide);
+
+  const [departure, setDeparture] = useState(null);
+  const [destination, setDestination] = useState(null);
+  const [distance, setDistance] = useState(0);
+  const [time, setTime] = useState(0);
+  const [dayPrice, setDayPrice] = useState(0);
+  const [nightPrice, setNightPrice] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Get current mode (automatic)
+  const isNightMode = getDayNightMode();
+}
