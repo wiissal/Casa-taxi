@@ -15,56 +15,58 @@ import { CASA_CENTER, USER_POSITION, AVAILABLE_TAXIS } from "../data/taxiData";
 import { casaLocations } from "../data/casaLocations";
 
 export default function Home() {
- 
   const [showBottomSheet, setShowBottomSheet] = useState(false);
   const [selectedDeparture, setSelectedDeparture] = useState(null);
   const [selectedDestination, setSelectedDestination] = useState(null);
   const router = useRouter();
 
   // Memoize the entire map - your friend's approach
-  const map = useMemo(() => (
-    <MapView style={styles.map} initialRegion={CASA_CENTER}>
-      {/* User Position - Green Marker */}
-      <Marker
-        coordinate={USER_POSITION}
-        pinColor="green"
-        title="Your Position"
-        description="You are here"
-      />
-      
-      {/* Location Markers - Blue */}
-      {casaLocations.map((location) => (
+  const map = useMemo(
+    () => (
+      <MapView style={styles.map} initialRegion={CASA_CENTER}>
+        {/* User Position - Green Marker */}
         <Marker
-          key={location.id}
-          coordinate={location.coordinates}
-          title={location.name}
-          anchor={{ x: 0.5, y: 0.5 }}
-        >
-          <View style={styles.locationMarkerContainer}>
-            <MaterialCommunityIcons
-              name="map-marker"
-              size={40}
-              color="#3B82F6"
-            />
-          </View>
-        </Marker>
-      ))}
-
-      {/* Taxi Markers - Red */}
-      {AVAILABLE_TAXIS.map((taxi) => (
-        <Marker
-          key={taxi.id}
-          coordinate={{
-            latitude: taxi.latitude,
-            longitude: taxi.longitude,
-          }}
-          title={taxi.name}
-          anchor={{ x: 0.5, y: 0.5 }}
-          image={require("../assets/taximap.png")}
+          coordinate={USER_POSITION}
+          pinColor="green"
+          title="Your Position"
+          description="You are here"
         />
-      ))}
-    </MapView>
-  ), []);
+
+        {/* Location Markers - Blue */}
+        {casaLocations.map((location) => (
+          <Marker
+            key={location.id}
+            coordinate={location.coordinates}
+            title={location.name}
+            anchor={{ x: 0.5, y: 0.5 }}
+          >
+            <View style={styles.locationMarkerContainer}>
+              <MaterialCommunityIcons
+                name="map-marker"
+                size={40}
+                color="#3B82F6"
+              />
+            </View>
+          </Marker>
+        ))}
+
+        {/* Taxi Markers - Red */}
+        {AVAILABLE_TAXIS.map((taxi) => (
+          <Marker
+            key={taxi.id}
+            coordinate={{
+              latitude: taxi.latitude,
+              longitude: taxi.longitude,
+            }}
+            title={taxi.name}
+            anchor={{ x: 0.5, y: 0.5 }}
+            image={require("../assets/taximap.png")}
+          />
+        ))}
+      </MapView>
+    ),
+    []
+  );
 
   const handleBooking = () => {
     if (selectedDeparture && selectedDestination) {
@@ -83,7 +85,7 @@ export default function Home() {
         style={styles.bookButton}
         onPress={() => setShowBottomSheet(true)}
       >
-        <Text style={styles.buttonText}> Book Ride Now</Text>
+        <Text style={styles.buttonText}> Book Now</Text>
       </TouchableOpacity>
 
       {/* Bottom Sheet Modal */}
@@ -211,7 +213,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  
+
   bottomSheetContainer: {
     flex: 1,
     justifyContent: "flex-end",
