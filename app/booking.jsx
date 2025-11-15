@@ -324,3 +324,224 @@ export default function Booking() {
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  // Taxi Image Section
+  taxiImageSection: {
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  taxiImageBg: {
+    width: 280,
+    height: 200,
+    backgroundColor: "#FFE8B6",
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#FFD700",
+    marginBottom: 15,
+  },
+  taxiImage: {
+    width: 220,
+    height: 150,
+    resizeMode: "contain",
+  },
+  arrowContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 20,
+  },
+  arrowButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#f5f5f5",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#FFD700",
+  },
+  // Cards
+  card: {
+    backgroundColor: "#f9f9f9",
+    borderRadius: 12,
+    padding: 15,
+    marginVertical: 10,
+    borderLeftWidth: 4,
+    borderLeftColor: "#FFD700",
+  },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 12,
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  tripRow: {
+    paddingVertical: 10,
+  },
+  tripLabel: {
+    fontSize: 12,
+    color: "#999",
+    fontWeight: "600",
+    marginBottom: 4,
+  },
+  tripValue: {
+    fontSize: 14,
+    color: "#000",
+    fontWeight: "bold",
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#e0e0e0",
+    marginVertical: 10,
+  },
+  modeBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    backgroundColor: "#FFFEF0",
+    borderRadius: 8,
+    borderLeftWidth: 4,
+    borderLeftColor: "#FFD700",
+    marginBottom: 12,
+  },
+  modeBadgeText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  rateRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    backgroundColor: "#f5f5f5",
+    borderRadius: 8,
+    marginVertical: 6,
+  },
+  rateLabel: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 4,
+  },
+  rateDetail: {
+    fontSize: 11,
+    color: "#999",
+    marginTop: 2,
+  },
+  rateAmount: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#DC143C",
+  },
+  totalSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingTop: 10,
+  },
+  totalLabel: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  totalPrice: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#FFD700",
+  },
+  infoBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: "#e0e0e0",
+  },
+  infoText: {
+    fontSize: 12,
+    color: "#666",
+    fontStyle: "italic",
+    flex: 1,
+  },
+  // Map Preview
+  mapPreviewContainer: {
+    marginVertical: 20,
+  },
+  mapPreviewTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#000",
+    marginBottom: 10,
+  },
+  mapPreview: {
+    height: 200,
+    borderRadius: 12,
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: "#FFD700",
+  },
+  mapPreviewMap: {
+    flex: 1,
+  },
+  // Book Now Button
+  bookNowButton: {
+    backgroundColor: "#FFD700",
+    marginHorizontal: 20,
+    marginVertical: 20,
+    paddingVertical: 16,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  bookNowButtonText: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 0.5,
+  },
+});
+
