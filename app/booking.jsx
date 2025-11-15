@@ -100,4 +100,42 @@ export default function Booking() {
       prev === TAXI_IMAGES.length - 1 ? 0 : prev + 1
     );
   };
-}
+//loading state
+// Loading state
+  if (!departure || !destination) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => router.back()}>
+            <MaterialCommunityIcons name="arrow-left" size={24} color="#000" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Request to Book</Text>
+          <View style={{ width: 24 }} />
+        </View>
+        <View style={styles.loadingContainer}>
+          <Text>Loading...</Text>
+        </View>
+      </View>
+    );
+  }
+
+  const currentPrice = isNightMode ? nightPrice : dayPrice;
+
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.back()}>
+          <MaterialCommunityIcons name="arrow-left" size={24} color="#000" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Request to Book</Text>
+        <View style={{ width: 24 }} />
+      </View>
+
+      <ScrollView
+        style={styles.content}
+        showsVerticalScrollIndicator={false}
+      ></ScrollView>
+
+</View>
+)}
