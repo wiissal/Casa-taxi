@@ -64,8 +64,13 @@ export default function Home() {
 
   const handleBooking = () => {
     if (selectedDeparture && selectedDestination) {
-      console.log("Booking:", selectedDeparture, selectedDestination);
-      router.push("/booking");
+      router.push({
+        pathname: "/booking",
+        params: {
+          departure: JSON.stringify(selectedDeparture),
+          destination: JSON.stringify(selectedDestination),
+        },
+      });
     }
   };
 
