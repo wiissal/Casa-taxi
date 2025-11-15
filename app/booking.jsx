@@ -135,7 +135,79 @@ export default function Booking() {
       <ScrollView
         style={styles.content}
         showsVerticalScrollIndicator={false}
-      ></ScrollView>
+      >
+        {/* Taxi Image Container */}
+        <View style={styles.taxiImageSection}>
+          <View style={styles.taxiImageBg}>
+            <Image
+              source={TAXI_IMAGES[currentImageIndex]}
+              style={styles.taxiImage}
+            />
+          </View>
+          {/* Navigation Arrows */}
+          <View style={styles.arrowContainer}>
+            <TouchableOpacity
+              style={styles.arrowButton}
+              onPress={handlePrevImage}
+            >
+              <MaterialCommunityIcons
+                name="chevron-left"
+                size={20}
+                color="#FFD700"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.arrowButton}
+              onPress={handleNextImage}
+            >
+              <MaterialCommunityIcons
+                name="chevron-right"
+                size={20}
+                color="#FFD700"
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Trip Details Card */}
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <MaterialCommunityIcons
+              name="calendar-clock"
+              size={20}
+              color="#FFD700"
+            />
+            <Text style={styles.cardTitle}>Trip Details</Text>
+          </View>
+
+          <View style={styles.tripRow}>
+            <View>
+              <Text style={styles.tripLabel}>Pickup</Text>
+              <Text style={styles.tripValue}>{departure.name}</Text>
+            </View>
+          </View>
+
+          <View style={styles.tripRow}>
+            <View>
+              <Text style={styles.tripLabel}>Dropoff</Text>
+              <Text style={styles.tripValue}>{destination.name}</Text>
+            </View>
+          </View>
+
+          <View style={styles.divider} />
+
+          <View style={styles.tripRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.tripLabel}>Distance</Text>
+              <Text style={styles.tripValue}>{distance} km</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.tripLabel}>Time</Text>
+              <Text style={styles.tripValue}>{time} min</Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
 
 </View>
 )}
