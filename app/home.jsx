@@ -210,7 +210,7 @@ export default function Home() {
                   setShowBottomSheet(false);
                 }}
               >
-                <Text style={styles.bookNowText}>Book Now</Text>
+                <Text style={styles.bookNowText}>GO</Text>
               </TouchableOpacity>
             )}
           </View>
