@@ -42,4 +42,33 @@ export default function Booking() {
 
   // Get current mode (automatic)
   const isNightMode = getDayNightMode();
+  // Parse locations from params (only once on mount)
+  useEffect(() => {
+    if (params?.departure && params?.destination) {
+      try {
+        setDeparture(JSON.parse(params.departure));
+        setDestination(JSON.parse(params.destination));
+      } catch (error) {
+        console.log("Error parsing params:", error);
+      }
+    }
+  }, []);
+
+  // Calculate distances and prices (only when departure/destination change)
+  useEffect(() => {
+    if (departure && destination) {
+      const dist = calculateDistance(
+        departure.coordinates,
+        destination.coordinates
+      );
+      const dayPriceCalc = calculatePrice(dist, false);
+      const nightPriceCalc = calculatePrice(dist, true);
+      const timeCalc = calculateTime(dist);
+
+      setDistance(dist);
+      setDayPrice(dayPriceCalc);
+      setNightPrice(nightPriceCalc);
+      setTime(timeCalc);
+    }
+  }, [departure, destination]);
 }
