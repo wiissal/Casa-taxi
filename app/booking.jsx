@@ -71,4 +71,33 @@ export default function Booking() {
       setTime(timeCalc);
     }
   }, [departure, destination]);
+  //handler functions
+  const handleConfirmBooking = () => {
+    if (!departure || !destination) {
+      Alert.alert("Error", "Locations Not Found");
+      return;
+    }
+    const selectedPrice = isNightMode ? nightPrice : dayPrice;
+    const rideData = {
+      departure,
+      destination,
+      distance,
+      price: selectedPrice,
+      time,
+      isNightMode: isNightMode,
+      timestamp: new Data().toISOString(),
+    };
+    startRide(rideData);
+    router.push("/ride");
+  };
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) =>
+      prev === 0 ? TAXI_IMAGES.length - 1 : prev - 1
+    );
+  };
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) =>
+      prev === TAXI_IMAGES.length - 1 ? 0 : prev + 1
+    );
+  };
 }
