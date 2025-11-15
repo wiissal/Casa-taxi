@@ -84,17 +84,6 @@ export default function Home() {
         {taxiMarkers}
       </MapView>
 
-      {/* Top Right: Night/Day Mode Switch - No Background */}
-      <View style={styles.switchContainer}>
-        <Text style={styles.switchLabel}>{isNightMode ? " Night" : "Day"}</Text>
-        <Switch
-          value={isNightMode}
-          onValueChange={setIsNightMode}
-          trackColor={{ false: "#FFD700", true: "#333" }}
-          thumbColor={isNightMode ? "#000" : "#fff"}
-        />
-      </View>
-
       {/* Bottom: Book Ride Button */}
       <TouchableOpacity
         style={styles.bookButton}
@@ -234,25 +223,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  switchContainer: {
-    position: "absolute",
-    top: 50,
-    right: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    zIndex: 10,
-    backgroundColor: "#ffd900ba",
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 5,git 
 
-  },
-  switchLabel: {
-    fontWeight: "bold",
-    fontSize: 14,
-    color: "#131313ff",
-  },
   bottomSheetContainer: {
     flex: 1,
     justifyContent: "flex-end",
@@ -306,7 +277,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   optionsScroll: {
-    paddingVertical: 10 ,
+    paddingVertical: 10,
     paddingHorizontal: 20,
   },
   selectionSection: {
@@ -351,25 +322,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   bookButton: {
-  position: "absolute",
-  bottom: 50,
-  left: 20,
-  right: 20,
-  backgroundColor: "#FFD700",
-  paddingVertical: 16,
-  borderRadius: 12,
-  justifyContent: "center",
-  alignItems: "center",
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.3,
-  shadowRadius: 6,
-  elevation: 8,
-},
-buttonText: {
-  color: "#000",
-  fontSize: 18,
-  fontWeight: "bold",
-  letterSpacing: 0.5,
-},
+    position: "absolute",
+    bottom: 50,
+    left: 20,
+    right: 20,
+    backgroundColor: "#FFD700",
+    paddingVertical: 16,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  buttonText: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 0.5,
+  },
 });
