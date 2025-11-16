@@ -15,20 +15,17 @@ export default function Index() {
 
   useEffect(() => {
     Animated.sequence([
-      // Taxi drives in from right
       Animated.timing(taxiPosition, {
         toValue: 0,
         duration: 2000,
         useNativeDriver: true,
       }),
-      // Text fades in
       Animated.timing(textOpacity, {
         toValue: 1,
         duration: 1000,
         useNativeDriver: true,
       }),
     ]).start(() => {
-      // After animation finishes, navigate to home
       router.push("/home");
     });
   }, []);
