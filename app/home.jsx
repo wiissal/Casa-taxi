@@ -3,7 +3,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  Switch,
   Modal,
   ScrollView,
 } from "react-native";
@@ -20,53 +19,51 @@ export default function Home() {
   const [selectedDestination, setSelectedDestination] = useState(null);
   const router = useRouter();
 
-  // Memoize the entire map - your friend's approach
-  const map = useMemo(
-    () => (
-      <MapView style={styles.map} initialRegion={CASA_CENTER}>
-        {/* User Position - Green Marker */}
+  // Wrap entire MapView in useMemo
+  const map = useMemo(() => (
+    <MapView style={styles.map} initialRegion={CASA_CENTER}>
+      {/* User Position - Green Marker */}
+      <Marker
+        coordinate={USER_POSITION}
+        pinColor="green"
+        title="Your Position"
+        description="You are here"
+      />
+
+      {/* Location Markers - Blue */}
+      {casaLocations.map((location) => (
         <Marker
-          coordinate={USER_POSITION}
-          pinColor="green"
-          title="Your Position"
-          description="You are here"
+          key={location.id}
+          coordinate={location.coordinates}
+          title={location.name}
+          anchor={{ x: 0.5, y: 0.5 }}
+        >
+          <View style={styles.locationMarkerContainer}>
+            <MaterialCommunityIcons
+              name="map-marker"
+              size={40}
+              color="#3B82F6"
+            />
+          </View>
+        </Marker>
+      ))}
+
+      {/* Taxi Markers - Red */}
+      {AVAILABLE_TAXIS.map((taxi) => (
+        <Marker
+          key={taxi.id}
+          coordinate={{
+            latitude: taxi.latitude,
+            longitude: taxi.longitude,
+          }}
+          title={taxi.name}
+          description={taxi.id}
+          anchor={{ x: 0.5, y: 0.5 }}
+          image={require("../assets/taximap.png")}
         />
-
-        {/* Location Markers - Blue */}
-        {casaLocations.map((location) => (
-          <Marker
-            key={location.id}
-            coordinate={location.coordinates}
-            title={location.name}
-            anchor={{ x: 0.5, y: 0.5 }}
-          >
-            <View style={styles.locationMarkerContainer}>
-              <MaterialCommunityIcons
-                name="map-marker"
-                size={40}
-                color="#3B82F6"
-              />
-            </View>
-          </Marker>
-        ))}
-
-        {/* Taxi Markers - Red */}
-        {AVAILABLE_TAXIS.map((taxi) => (
-          <Marker
-            key={taxi.id}
-            coordinate={{
-              latitude: taxi.latitude,
-              longitude: taxi.longitude,
-            }}
-            title={taxi.name}
-            anchor={{ x: 0.5, y: 0.5 }}
-            image={require("../assets/taximap.png")}
-          />
-        ))}
-      </MapView>
-    ),
-    []
-  );
+      ))}
+    </MapView>
+  ), [CASA_CENTER, USER_POSITION, AVAILABLE_TAXIS, casaLocations]);
 
   const handleBooking = () => {
     if (selectedDeparture && selectedDestination) {
@@ -80,27 +77,22 @@ export default function Home() {
     }
   };
 
+  const resetSelection = () => {
+    setSelectedDeparture(null);
+    setSelectedDestination(null);
+  };
+
   return (
     <View style={styles.container}>
-      {/* Map */}
-      <MapView style={styles.map} initialRegion={CASA_CENTER}>
-        {/* User Position - Green Marker */}
-        <Marker
-          coordinate={USER_POSITION}
-          pinColor="green"
-          title="Your Position"
-          description="You are here"
-        />
-        {locationMarkers}
-        {taxiMarkers}
-      </MapView>
+      {/* Memoized Map */}
+      {map}
 
-      {/* Bottom: Book Ride Button */}
+      {/* Book Ride Button */}
       <TouchableOpacity
         style={styles.bookButton}
         onPress={() => setShowBottomSheet(true)}
       >
-        <Text style={styles.buttonText}> Book Now</Text>
+        <Text style={styles.buttonText}>Book Now</Text>
       </TouchableOpacity>
 
       {/* Bottom Sheet Modal */}
@@ -108,12 +100,18 @@ export default function Home() {
         visible={showBottomSheet}
         transparent={true}
         animationType="slide"
-        onRequestClose={() => setShowBottomSheet(false)}
+        onRequestClose={() => {
+          setShowBottomSheet(false);
+          resetSelection();
+        }}
       >
         <View style={styles.bottomSheetContainer}>
           <TouchableOpacity
             style={styles.overlay}
-            onPress={() => setShowBottomSheet(false)}
+            onPress={() => {
+              setShowBottomSheet(false);
+              resetSelection();
+            }}
           />
 
           <View style={styles.bottomSheetContent}>
@@ -203,6 +201,7 @@ export default function Home() {
                 onPress={() => {
                   handleBooking();
                   setShowBottomSheet(false);
+                  resetSelection();
                 }}
               >
                 <Text style={styles.bookNowText}>Book Now</Text>
@@ -227,6 +226,35 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     alignItems: "center",
+  },
+  taxiMarkerContainer: {
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  bookButton: {
+    position: "absolute",
+    bottom: 50,
+    left: 20,
+    right: 20,
+    backgroundColor: "#FFD700",
+    paddingVertical: 16,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  buttonText: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 0.5,
   },
 
   bottomSheetContainer: {
@@ -253,6 +281,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 15,
   },
+
   rideInfo: {
     paddingHorizontal: 20,
     paddingVertical: 12,
@@ -281,6 +310,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 2,
   },
+
   optionsScroll: {
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -312,6 +342,7 @@ const styles = StyleSheet.create({
     color: "#333",
     fontWeight: "500",
   },
+
   bookNowButton: {
     backgroundColor: "#FFD700",
     marginHorizontal: 20,
@@ -325,27 +356,5 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 16,
     fontWeight: "bold",
-  },
-  bookButton: {
-    position: "absolute",
-    bottom: 50,
-    left: 20,
-    right: 20,
-    backgroundColor: "#FFD700",
-    paddingVertical: 16,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 8,
-  },
-  buttonText: {
-    color: "#000",
-    fontSize: 18,
-    fontWeight: "bold",
-    letterSpacing: 0.5,
   },
 });
