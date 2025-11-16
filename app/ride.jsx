@@ -504,7 +504,7 @@ useEffect(() => {
   </TouchableOpacity>
 </View>
 
-{/* ===== VIEW SUMMARY & END RIDE BUTTONS (SAME ROW) ===== */}
+{/* VIEW SUMMARY  and END RIDE BUTTONS */}
 <View style={styles.bottomButtonsContainer}>
   <TouchableOpacity
     style={styles.summaryButtonModal}
