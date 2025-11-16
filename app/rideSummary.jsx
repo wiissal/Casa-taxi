@@ -1,5 +1,3 @@
-ride summary 
-
 import {
   View,
   StyleSheet,
