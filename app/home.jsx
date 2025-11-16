@@ -70,15 +70,30 @@ export default function Home() {
 
   const handleBooking = () => {
     if (selectedDeparture && selectedDestination) {
-      console.log("Booking:", selectedDeparture, selectedDestination);
-      router.push("/booking");
+      router.push({
+        pathname: "/booking",
+        params: {
+          departure: JSON.stringify(selectedDeparture),
+          destination: JSON.stringify(selectedDestination),
+        },
+      });
     }
   };
 
   return (
     <View style={styles.container}>
       {/* Map */}
-      {map}
+      <MapView style={styles.map} initialRegion={CASA_CENTER}>
+        {/* User Position - Green Marker */}
+        <Marker
+          coordinate={USER_POSITION}
+          pinColor="green"
+          title="Your Position"
+          description="You are here"
+        />
+        {locationMarkers}
+        {taxiMarkers}
+      </MapView>
 
       {/* Bottom: Book Ride Button */}
       <TouchableOpacity
