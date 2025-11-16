@@ -122,28 +122,53 @@ export default function Ride() {
       });
     }
   }, [activeRide]);
-
-  //  REANIMATED ANIMATION 
-  const animatedStyle = useAnimatedStyle(() => {
-    if (!activeRide) return {};
-
+  // ===== REANIMATED ANIMATION (FIXED) =====
+useEffect(() => {
+  const interval = setInterval(() => {
+    if (!activeRide || rideCompleted) return;
+    
+    const progress = (elapsed / (activeRide.time * 60));
+    
     const lat =
       activeRide.departure.coordinates.latitude +
-      taxiProgress.value *
+      progress *
         (activeRide.destination.coordinates.latitude -
           activeRide.departure.coordinates.latitude);
 
     const lon =
       activeRide.departure.coordinates.longitude +
-      taxiProgress.value *
+      progress *
         (activeRide.destination.coordinates.longitude -
           activeRide.departure.coordinates.longitude);
 
-    runOnJS(setTaxiLat)(lat);
-    runOnJS(setTaxiLon)(lon);
+    setTaxiLat(lat);
+    setTaxiLon(lon);
+  }, 100);
 
-    return {};
-  });
+  return () => clearInterval(interval);
+}, [elapsed, activeRide, rideCompleted]);
+
+  // //  REANIMATED ANIMATION 
+  // const animatedStyle = useAnimatedStyle(() => {
+  //   if (!activeRide) return {};
+
+  //   const lat =
+  //     activeRide.departure.coordinates.latitude +
+  //     taxiProgress.value *
+  //       (activeRide.destination.coordinates.latitude -
+  //         activeRide.departure.coordinates.latitude);
+
+  //   const lon =
+  //     activeRide.departure.coordinates.longitude +
+  //     taxiProgress.value *
+  //       (activeRide.destination.coordinates.longitude -
+  //         activeRide.departure.coordinates.longitude);
+
+  //   runOnJS(setTaxiLat)(lat);
+  //   runOnJS(setTaxiLon)(lon);
+
+  //   return {};
+  // });
 
   //  TIMER USEEFFECT 
   useEffect(() => {
@@ -215,7 +240,6 @@ export default function Ride() {
       </View>
     );
   }
-
   const remainingTime = Math.max(0, activeRide.time * 60 - elapsed);
 
   return (
@@ -294,26 +318,56 @@ export default function Ride() {
       </View>
 
       {/* BOTTOM PREVIEW CARD */}
-      <TouchableOpacity
-        style={styles.previewCard}
-        onPress={() => setShowModal(true)}
-      >
-        <View style={styles.previewLeft}>
-          <Text style={styles.avatarLarge}>{driver.avatar}</Text>
-          <View style={styles.previewInfo}>
-            <Text style={styles.driverName}>{driver.name}</Text>
-            <View style={styles.ratingContainer}>
-              <MaterialCommunityIcons name="star" size={14} color="#FFD700" />
-              <Text style={styles.ratingText}>{driver.rating}</Text>
-            </View>
-          </View>
-        </View>
+<TouchableOpacity
+  style={styles.previewCard}
+  onPress={() => setShowModal(true)}
+>
+  <View style={styles.previewLeft}>
+    <Text style={styles.avatarLarge}>{driver.avatar}</Text>
+    <View style={styles.previewInfo}>
+      <Text style={styles.driverName}>{driver.name}</Text>
+      <View style={styles.ratingContainer}>
+        <MaterialCommunityIcons name="star" size={14} color="#FFD700" />
+        <Text style={styles.ratingText}>{driver.rating}</Text>
+      </View>
+    </View>
+  </View>
 
-        <View style={styles.previewRight}>
-          <Text style={styles.tapText}>Tap for details</Text>
-          <MaterialCommunityIcons name="chevron-up" size={24} color="#FFD700" />
-        </View>
-      </TouchableOpacity>
+  <View style={styles.previewRight}>
+    <Text style={styles.tapText}>Tap for details</Text>
+    <MaterialCommunityIcons name="chevron-up" size={24} color="#FFD700" />
+  </View>
+</TouchableOpacity>
+{/* ===== VIEW SUMMARY BUTTON =====
+{rideCompleted && (
+  <TouchableOpacity
+    style={styles.summaryButton}
+    onPress={() => {
+      const rideData = {
+        departure: activeRide.departure,
+        destination: activeRide.destination,
+        distance: activeRide.distance,
+        duration: elapsed,
+        price: activeRide.price,
+        totalPrice: realTimePrice,
+        driverName: driver.name,
+        driverAvatar: driver.avatar,
+        driverRating: driver.rating,
+        driverReviews: driver.reviews,
+        carModel: driver.car,
+        carPlate: driver.plate,
+        pricePerKm: activeRide.isNightMode ? 2.0 : 1.5,
+      };
+      router.push({
+        pathname: "/rideSummary",
+        params: { rideData: JSON.stringify(rideData) },
+      });
+    }}
+  >
+    <MaterialCommunityIcons name="receipt" size={20} color="#fff" />
+    <Text style={styles.summaryButtonText}>View Summary</Text>
+  </TouchableOpacity>
+)} */}
 
       {/*  MODAL */}
       <Modal
@@ -433,33 +487,65 @@ export default function Ride() {
               </View>
 
               {/* ACTION BUTTONS */}
-              <View style={styles.actionsContainer}>
-                <TouchableOpacity style={styles.actionButton} onPress={handleCallDriver}>
-                  <MaterialCommunityIcons name="phone" size={20} color="#FFD700" />
-                  <Text style={styles.actionButtonText}>Call Driver</Text>
-                </TouchableOpacity>
+<View style={styles.actionsContainer}>
+  <TouchableOpacity style={styles.actionButton} onPress={handleCallDriver}>
+    <MaterialCommunityIcons name="phone" size={20} color="#FFD700" />
+    <Text style={styles.actionButtonText}>Call Driver</Text>
+  </TouchableOpacity>
 
-                <TouchableOpacity style={styles.actionButton}>
-                  <MaterialCommunityIcons name="message" size={20} color="#FFD700" />
-                  <Text style={styles.actionButtonText}>Message</Text>
-                </TouchableOpacity>
+  <TouchableOpacity style={styles.actionButton}>
+    <MaterialCommunityIcons name="message" size={20} color="#FFD700" />
+    <Text style={styles.actionButtonText}>Message</Text>
+  </TouchableOpacity>
 
-                <TouchableOpacity style={styles.actionButton}>
-                  <MaterialCommunityIcons name="share-variant" size={20} color="#FFD700" />
-                  <Text style={styles.actionButtonText}>Share </Text>
-                </TouchableOpacity>
-              </View>
+  <TouchableOpacity style={styles.actionButton}>
+    <MaterialCommunityIcons name="share-variant" size={20} color="#FFD700" />
+    <Text style={styles.actionButtonText}>Share</Text>
+  </TouchableOpacity>
+</View>
 
-              {/*  END RIDE BUTTON  */}
-              <TouchableOpacity
-                style={styles.cancelButton}
-                onPress={handleEndRide}
-              >
-                <MaterialCommunityIcons name="close-circle" size={20} color="#fff" />
-                <Text style={styles.cancelButtonText}>End Ride</Text>
-              </TouchableOpacity>
+{/* ===== VIEW SUMMARY & END RIDE BUTTONS (SAME ROW) ===== */}
+<View style={styles.bottomButtonsContainer}>
+  <TouchableOpacity
+    style={styles.summaryButtonModal}
+    onPress={() => {
+      const rideData = {
+        departure: activeRide.departure,
+        destination: activeRide.destination,
+        distance: activeRide.distance,
+        duration: elapsed,
+        price: activeRide.price,
+        totalPrice: realTimePrice,
+        driverName: driver.name,
+        driverAvatar: driver.avatar,
+        driverRating: driver.rating,
+        driverReviews: driver.reviews,
+        carModel: driver.car,
+        carPlate: driver.plate,
+        pricePerKm: activeRide.isNightMode ? 2.0 : 1.5,
+      };
+      router.push({
+        pathname: "/rideSummary",
+        params: { rideData: JSON.stringify(rideData) },
+      });
+    }}
+  >
+    <MaterialCommunityIcons name="receipt" size={20} color="#fff" />
+    <Text style={styles.summaryButtonModalText}>View Summary</Text>
+  </TouchableOpacity>
 
-              <View style={{ height: 20 }} />
+  <TouchableOpacity
+    style={styles.cancelButton}
+    onPress={handleEndRide}
+  >
+    <MaterialCommunityIcons name="close-circle" size={20} color="#fff" />
+    <Text style={styles.cancelButtonText}>End Ride</Text>
+  </TouchableOpacity>
+</View>
+
+<View style={{ height: 20 }} />
+
+              
             </ScrollView>
           </View>
         </View>
@@ -509,6 +595,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
   },
+  summaryButton: {
+  position: "absolute",
+  bottom: 20,
+  left: 20,
+  right: 20,
+  backgroundColor: "#4CAF50",
+  paddingVertical: 14,
+  borderRadius: 10,
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 8,
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.3,
+  shadowRadius: 4,
+  elevation: 5,
+},
+summaryButtonText: {
+  fontSize: 16,
+  fontWeight: "bold",
+  color: "#fff",
+},
   timerBox: {
     flexDirection: "row",
     alignItems: "center",
@@ -537,7 +646,26 @@ const styles = StyleSheet.create({
     color: "#FFD700",
     marginTop: 2,
   },
-  
+  bottomButtonsContainer: {
+  flexDirection: "row",
+  gap: 10,
+  marginBottom: 15,
+},
+summaryButtonModal: {
+  flex: 1,
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 6,
+  backgroundColor: "#4CAF50",
+  paddingVertical: 14,
+  borderRadius: 10,
+},
+summaryButtonModalText: {
+  fontSize: 16,
+  fontWeight: "bold",
+  color: "#fff",
+},
   previewCard: {
     position: "absolute",
     bottom: 20,
@@ -787,14 +915,14 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   cancelButton: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 8,
-    backgroundColor: "#DC143C",
-    paddingVertical: 14,
-    borderRadius: 10,
-    marginBottom: 20,
+      flex: 1,
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 8,
+  backgroundColor: "#DC143C",
+  paddingVertical: 14,
+  borderRadius: 10,
   },
   cancelButtonText: {
     fontSize: 16,
