@@ -15,39 +15,39 @@ export const USER_POSITION = {
 // 6 Available taxis around Casablanca
 export const AVAILABLE_TAXIS = [
   {
-    id: "TAXI-001",
+    id: "TAXI-01",
     latitude: 33.5821,
     longitude: -7.5998,
-    name: "Hassan",
+    name: "Ahmed ben ali",
   },
   {
-    id: "TAXI-002",
+    id: "TAXI-02",
     latitude: 33.5741,
     longitude: -7.5788,
-    name: "Mohammed",
+    name: "Mohammed Hassan",
   },
   {
-    id: "TAXI-003",
+    id: "TAXI-03",
     latitude: 33.5621,
     longitude: -7.5998,
-    name: "Adil",
+    name: "karim Younis",
   },
   {
-    id: "TAXI-004",
+    id: "TAXI-04",
     latitude: 33.5841,
     longitude: -7.5798,
-    name: "Fatima",
+    name: "Hassan Mansouri",
   },
   {
-    id: "TAXI-005",
+    id: "TAXI-05",
     latitude: 33.5731,
     longitude: -7.6098,
-    name: "Karim",
+    name: "Rachid Salam",
   },
   {
-    id: "TAXI-006",
+    id: "TAXI-06",
     latitude: 33.5651,
     longitude: -7.5998,
-    name: "Leila",
+    name: "Tariq Belkhir",
   },
 ];

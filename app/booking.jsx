@@ -24,7 +24,7 @@ import {
 const TAXI_IMAGES = [
   require("../assets/red-taxi.png"),
   require("../assets/taximap.png"),
-  require("../taxithree.png"),
+  require("../assets/taxithree.png"),
 ];
 
 export default function Booking() {
@@ -85,7 +85,7 @@ export default function Booking() {
       price: selectedPrice,
       time,
       isNightMode: isNightMode,
-      timestamp: new Data().toISOString(),
+      timestamp: new Date().toISOString(),
     };
     startRide(rideData);
     router.push("/ride");
@@ -100,8 +100,8 @@ export default function Booking() {
       prev === TAXI_IMAGES.length - 1 ? 0 : prev + 1
     );
   };
-//loading state
-// Loading state
+  //loading state
+  // Loading state
   if (!departure || !destination) {
     return (
       <View style={styles.container}>
@@ -126,16 +126,13 @@ export default function Booking() {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <MaterialCommunityIcons name="arrow-left" size={24} color="#000" />
+          <MaterialCommunityIcons name="arrow-left" size={24} color="#000" paddingTop={20} />
         </TouchableOpacity>
-        <Text style={styles.title}>Request to Book</Text>
+        <Text style={styles.title}>Book Now</Text>
         <View style={{ width: 24 }} />
       </View>
 
-      <ScrollView
-        style={styles.content}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Taxi Image Container */}
         <View style={styles.taxiImageSection}>
           <View style={styles.taxiImageBg}>
@@ -231,7 +228,7 @@ export default function Booking() {
           {/* Day Rate */}
           <View style={styles.rateRow}>
             <View>
-              <Text style={styles.rateLabel}>☀️ Day Rate (6 AM - 6 PM)</Text>
+              <Text style={styles.rateLabel}> Day Rate (6 AM - 6 PM)</Text>
               <Text style={styles.rateDetail}>1.50 DH/km + 7.50 DH base</Text>
             </View>
             <Text style={styles.rateAmount}>{dayPrice} DH</Text>
@@ -240,7 +237,7 @@ export default function Booking() {
           {/* Night Rate */}
           <View style={styles.rateRow}>
             <View>
-              <Text style={styles.rateLabel}>🌙 Night Rate (6 PM - 6 AM)</Text>
+              <Text style={styles.rateLabel}>Night Rate (6 PM - 6 AM)</Text>
               <Text style={styles.rateDetail}>2.00 DH/km + 7.50 DH base</Text>
             </View>
             <Text style={styles.rateAmount}>{nightPrice} DH</Text>
@@ -302,10 +299,7 @@ export default function Booking() {
 
               {/* Route line */}
               <Polyline
-                coordinates={[
-                  departure.coordinates,
-                  destination.coordinates,
-                ]}
+                coordinates={[departure.coordinates, destination.coordinates]}
                 strokeColor="#FFD700"
                 strokeWidth={3}
               />
@@ -342,6 +336,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#000",
+    paddingTop: 20,
   },
   content: {
     flex: 1,
@@ -544,4 +539,3 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
 });
-
