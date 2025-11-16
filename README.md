@@ -42,6 +42,8 @@ TAXI-APP is a React Native mobile application designed to simplify booking red p
 - Driver rating option
 - Option to book another ride or go home
 
+  ![image alt](https://github.com/wiissal/Casa-taxi/blob/27ba391c83e61e9fdea095b61178e16c18f53bc0/20251116_215846.jpg)
+
 ## 💻 Tech Stack
 
 | Technology | Purpose |
