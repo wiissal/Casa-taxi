@@ -71,7 +71,7 @@ export default function RideSummary() {
   // Handle share receipt
   const handleShareReceipt = async () => {
     try {
-      const message = `CASATAXI Receipt\n\nPickup: ${rideData?.departure?.name}\nDestination: ${rideData?.destination?.name}\nDistance: ${rideData?.distance}km\nTime: ${formatTime(rideData?.duration || 0)}\nTotal: ${rideData?.totalPrice}DH\n\nThank you for using CASATAXI!`;
+      const message = `MOVE Receipt\n\nPickup: ${rideData?.departure?.name}\nDestination: ${rideData?.destination?.name}\nDistance: ${rideData?.distance}km\nTime: ${formatTime(rideData?.duration || 0)}\nTotal: ${rideData?.totalPrice}DH\n\nThank you for using CASATAXI!`;
       
       await Share.share({
         message: message,
@@ -119,16 +119,16 @@ export default function RideSummary() {
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
-        {/* ===== SUCCESS HEADER ===== */}
+        {/*  SUCCESS HEADER  */}
         <View style={styles.successHeader}>
           <Animated.View style={[styles.checkmarkCircle, checkmarkAnimatedStyle]}>
             <MaterialCommunityIcons name="check" size={60} color="#fff" />
           </Animated.View>
           <Text style={styles.successTitle}>Ride Completed!</Text>
-          <Text style={styles.successSubtitle}>Thank you for riding with CASATAXI</Text>
+          <Text style={styles.successSubtitle}>Thank you for riding with MOVE</Text>
         </View>
 
-        {/* ===== TRIP SUMMARY CARD ===== */}
+        {/*  TRIP SUMMARY CARD  */}
         <View style={styles.summaryCard}>
           <View style={styles.routeContainer}>
             {/* Pickup */}
