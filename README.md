@@ -126,6 +126,22 @@ npx expo start
 6. **Complete Ride** - Rate driver and see trip summary
 7. **Repeat** - Option to book another ride
 
+![Screenshot_20251116_211514_Expo_Go 1](https://github.com/user-attachments/assets/b4467209-6433-4e8a-acc9-0c2cdb53542d)
+
+![Screenshot_20251116_211853_Expo_Go 1](https://github.com/user-attachments/assets/303e1fd9-5b8e-4d63-b482-aeeef82f22c2)
+
+  ![Screenshot_20251116_211915_Expo_Go 1](https://github.com/user-attachments/assets/63c84438-1c89-4221-a559-f3c280becadd)
+
+  
+![Screenshot_20251116_211921_Expo_Go 1](https://github.com/user-attachments/assets/b8fc53dc-2c65-4a70-b674-3045facfc401)
+
+![Screenshot_20251116_211939_Expo_Go 1](https://github.com/user-attachments/assets/5c2d1694-3a69-4126-9508-aaba36452132)
+
+![Screenshot_20251116_211944_Expo_Go 1](https://github.com/user-attachments/assets/810896ca-40df-4000-b18d-d0c24c2833fb)
+
+![Screenshot_20251116_211949_Expo_Go 1](https://github.com/user-attachments/assets/e6de8b91-24c2-45ce-b696-357702f84de3)
+
+
 
 **Challenge**: Markers were flickering when parent state changed. Solution used React.memo to prevent re-renders of static map content.
 
