@@ -6,7 +6,7 @@ import {
   Modal,
   ScrollView,
 } from "react-native";
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from "expo-router";
 import MapView, { Marker } from "react-native-maps";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -20,50 +20,53 @@ export default function Home() {
   const router = useRouter();
 
   // Wrap entire MapView in useMemo
-  const map = useMemo(() => (
-    <MapView style={styles.map} initialRegion={CASA_CENTER}>
-      {/* User Position - Green Marker */}
-      <Marker
-        coordinate={USER_POSITION}
-        pinColor="green"
-        title="Your Position"
-        description="You are here"
-      />
-
-      {/* Location Markers - Blue */}
-      {casaLocations.map((location) => (
+  const map = useMemo(
+    () => (
+      <MapView style={styles.map} initialRegion={CASA_CENTER}>
+        {/* User Position - Green Marker */}
         <Marker
-          key={location.id}
-          coordinate={location.coordinates}
-          title={location.name}
-          anchor={{ x: 0.5, y: 0.5 }}
-        >
-          <View style={styles.locationMarkerContainer}>
-            <MaterialCommunityIcons
-              name="map-marker"
-              size={40}
-              color="#3B82F6"
-            />
-          </View>
-        </Marker>
-      ))}
-
-      {/* Taxi Markers - Red */}
-      {AVAILABLE_TAXIS.map((taxi) => (
-        <Marker
-          key={taxi.id}
-          coordinate={{
-            latitude: taxi.latitude,
-            longitude: taxi.longitude,
-          }}
-          title={taxi.name}
-          description={taxi.id}
-          anchor={{ x: 0.5, y: 0.5 }}
-          image={require("../assets/taximap.png")}
+          coordinate={USER_POSITION}
+          pinColor="green"
+          title="Your Position"
+          description="You are here"
         />
-      ))}
-    </MapView>
-  ), [CASA_CENTER, USER_POSITION, AVAILABLE_TAXIS, casaLocations]);
+
+        {/* Location Markers - Blue */}
+        {casaLocations.map((location) => (
+          <Marker
+            key={location.id}
+            coordinate={location.coordinates}
+            title={location.name}
+            anchor={{ x: 0.5, y: 0.5 }}
+          >
+            <View style={styles.locationMarkerContainer}>
+              <MaterialCommunityIcons
+                name="map-marker"
+                size={40}
+                color="#3B82F6"
+              />
+            </View>
+          </Marker>
+        ))}
+
+        {/* Taxi Markers - Red */}
+        {AVAILABLE_TAXIS.map((taxi) => (
+          <Marker
+            key={taxi.id}
+            coordinate={{
+              latitude: taxi.latitude,
+              longitude: taxi.longitude,
+            }}
+            title={taxi.name}
+            description={taxi.id}
+            anchor={{ x: 0.5, y: 0.5 }}
+            image={require("../assets/taximap.png")}
+          />
+        ))}
+      </MapView>
+    ),
+    [CASA_CENTER, USER_POSITION, AVAILABLE_TAXIS]
+  );
 
   const handleBooking = () => {
     if (selectedDeparture && selectedDestination) {

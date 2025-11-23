@@ -1,5 +1,4 @@
-import { create } from "zustand";
-
+import { create } from "zustand"
 export const useTaxiStore = create((set) => ({
   // State
   isNightMode: false,
@@ -9,7 +8,7 @@ export const useTaxiStore = create((set) => ({
   // Actions
   toggleNightMode: () =>
     set((state) => ({
-      isNightMode: !state.isNightMode,
+      isNightMode: !state.isNightMode,npx
     })),
 
   startRide: (rideData) =>
